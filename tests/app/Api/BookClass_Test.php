@@ -8,7 +8,8 @@
  */
 
 namespace tests\App\Api;
-use App\Api\BookClass;
+
+require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
 {
@@ -17,8 +18,6 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $this->appApiBookClass = new \App\Api\BookClass();
     }
 
     protected function tearDown()
@@ -31,20 +30,18 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @group testGetRules
-     */
-    public function testGetRules()
-    {
-        $rs = $this->appApiBookClass->getRules();
-    }
-
-    /**
-     * @group testAddClass
-     */ 
     public function testAddClass()
     {
-        $rs = $this->appApiBookClass->addClass();
+        try {
+            $url = 's=BookClass.AddClass';
+            $params = array('parent_id' => 0, 'name' => '测试分类');
+
+            $rs = \PhalApi\Helper\TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -52,7 +49,7 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testDeleteClass()
     {
-        $rs = $this->appApiBookClass->deleteClass();
+
     }
 
     /**
@@ -60,7 +57,7 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testModifyClass()
     {
-        $rs = $this->appApiBookClass->modifyClass();
+
     }
 
     /**
@@ -68,9 +65,6 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testClassBookMarkCount()
     {
-        $rs = $this->appApiBookClass->classBookMarkCount();
-
-        $this->assertTrue(is_int($rs));
 
     }
 
