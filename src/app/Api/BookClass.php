@@ -44,7 +44,7 @@ class BookClass extends Api
      */
     public function addClass()
     {
-        return $this->parent_id;
+
     }
 
     /**
