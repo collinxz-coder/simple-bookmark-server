@@ -89,6 +89,8 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
 
         $res = TestRunner::go($url, $params);
 
+        var_dump($res);
+
         $this->assertArrayHasKey('count', $res);
     }
 

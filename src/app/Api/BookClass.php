@@ -8,6 +8,7 @@
 namespace App\Api;
 
 use PhalApi\Api;
+use App\Domain\BookClass as Domain_BookClass;
 
 /**
  * 书签分类
@@ -41,10 +42,12 @@ class BookClass extends Api
      * @desc 添加书签分类
      *
      * @exception 400 参数不匹配
+     * @exception 10001 添加数据失败
      */
     public function addClass()
     {
-
+        $domainBookClass = new Domain_BookClass();
+        $domainBookClass->addClass($this->name, $this->parent_id);
     }
 
     /**
@@ -52,10 +55,14 @@ class BookClass extends Api
      * @desc 删除指定分类
      *
      * @exception 400 参数不匹配
+     * @exception 1002 子分类不为空，删除失败
+     * @exception 1003 分类下还有书签，删除失败
+     * @exception 1004 删除失败
      */
     public function deleteClass()
     {
-
+        $domainBookClass = new Domain_BookClass();
+        $domainBookClass->deleteClass($this->id);
     }
 
     /**
@@ -63,10 +70,12 @@ class BookClass extends Api
      * @desc 修改指定分类
      *
      * @exception 400 参数不匹配
+     * @exception 1005 修改失败
      */
     public function modifyClass()
     {
-
+        $domainBookClass = new Domain_BookClass();
+        $domainBookClass->updateClass($this->id, $this->parent_id, $this->name);
     }
 
 
@@ -79,6 +88,8 @@ class BookClass extends Api
      */
     public function classBookMarkCount()
     {
-        return ["count" => 0];
+        $domainBookClass = new Domain_BookClass();
+        $count = $domainBookClass->getCount($this->id);
+        return array('count' => $count);
     }
 }

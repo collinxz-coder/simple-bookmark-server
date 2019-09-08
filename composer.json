@@ -23,7 +23,8 @@
     },
     "autoload": {
         "files": [
-            "src/app/functions.php"
+            "src/app/functions.php",
+            "src/app/error_code.php"
             ],
         "psr-4": {
             "App\\": "src/app"
