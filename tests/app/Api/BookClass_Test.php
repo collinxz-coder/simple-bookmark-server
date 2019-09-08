@@ -9,6 +9,8 @@
 
 namespace tests\App\Api;
 
+use PhalApi\Helper\TestRunner;
+
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
@@ -49,7 +51,16 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testDeleteClass()
     {
+        try {
+            $url = 's=BookClass.DeleteClass';
+            $params = array('id' => 1);
 
+            $rs = \PhalApi\Helper\TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -57,7 +68,15 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testModifyClass()
     {
+        try {
+            $url = 's=BookClass.ModifyClass';
+            $params = array('id' => 1, 'parent_id' => 0, 'name' => 'collin');
+            $res = TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
 
+        $this->assertTrue(true);
     }
 
     /**
@@ -65,7 +84,12 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testClassBookMarkCount()
     {
+        $url = 's=BookClass.classBookMarkCount';
+        $params = array('id' => 1);
 
+        $res = TestRunner::go($url, $params);
+
+        $this->assertArrayHasKey('count', $res);
     }
 
 }
