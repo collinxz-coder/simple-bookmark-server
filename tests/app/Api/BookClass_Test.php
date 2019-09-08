@@ -38,7 +38,7 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
             $url = 's=BookClass.AddClass';
             $params = array('parent_id' => 0, 'name' => '测试分类');
 
-            $rs = \PhalApi\Helper\TestRunner::go($url, $params);
+            $rs = TestRunner::go($url, $params);
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -55,7 +55,7 @@ class PhpUnderControl_AppApiBookClass_Test extends \PHPUnit\Framework\TestCase
             $url = 's=BookClass.DeleteClass';
             $params = array('id' => 1);
 
-            $rs = \PhalApi\Helper\TestRunner::go($url, $params);
+            $rs = TestRunner::go($url, $params);
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }

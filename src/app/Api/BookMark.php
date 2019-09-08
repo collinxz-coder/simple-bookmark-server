@@ -8,6 +8,7 @@
 namespace App\Api;
 
 use PhalApi\Api;
+use App\Domain\BookMark as Domain_BookMark;
 
 /**
  * 书签
@@ -29,7 +30,8 @@ class BookMark extends Api
             'modifyBookMark' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '书签 id'),
                 'name' => array('name' => 'name', 'type' => 'string', 'desc' => '书签名称'),
-                'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'desc' => '书签地址')
+                'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'desc' => '书签地址'),
+                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '书签分类id')
             ),
             'increaseReadCount' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '书签 id'),
@@ -37,6 +39,9 @@ class BookMark extends Api
             'readCountTop' => array(
                 'count' => array('name' => 'count', 'type' => 'int', 'default' => 10, 'desc' => '需要获取的数量，默认为10条'),
                 'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '需要获取的分类，默认为获取所有分类下的数据')
+            ),
+            'getBookMarkFromClass' => array(
+                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'require' => true, 'desc' => '书签分类id')
             )
         );
     }
@@ -50,7 +55,10 @@ class BookMark extends Api
      */
     public function getAllBookMark()
     {
-        return [];
+        $domain_bookmark = new Domain_BookMark();
+        $res = $domain_bookmark->getAllBookMark();
+
+        return ['data' => $res];
     }
 
     /**
@@ -58,12 +66,15 @@ class BookMark extends Api
      * @desc 在指定分类下，添加一条书签
      *
      * @exception 400 参数不匹配
-     * @exception 1000 数据已经存在
+     * @exception 1006 分类不存在
+     * @exception 1007 URL已经存在
+     * @exception 10001 添加失败
      *
      */
     public function addBookMark()
     {
-
+        $domain_bookmark = new Domain_BookMark();
+        $domain_bookmark->addBookMark($this->class_id, $this->name, $this->url);
     }
 
     /**
@@ -71,10 +82,12 @@ class BookMark extends Api
      * @desc 删除指定 id 的书签
      *
      * @exception 400 参数不匹配
+     * @exception 1004 删除失败
      */
     public function deleteBookMark()
     {
-
+        $domain_bookmark = new Domain_BookMark();
+        $domain_bookmark->deleteBookMark($this->id);
     }
 
     /**
@@ -85,7 +98,12 @@ class BookMark extends Api
      */
     public function modifyBookMark()
     {
-
+        (new Domain_BookMark())->updateBookMark(
+            $this->id,
+            $this->name,
+            $this->url,
+            $this->class_id
+        );
     }
 
     /**
@@ -118,6 +136,7 @@ class BookMark extends Api
      */
     public function getBookMarkFromClass()
     {
-        return [];
+        $data = (new Domain_BookMark())->getBookMarkFromClass($this->class_id);
+        return ['data' => $data];
     }
 }

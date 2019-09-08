@@ -78,4 +78,18 @@ class BookClass extends NotORM {
 
         return $orm->where(self::KEY_ID, $id)->update($data);
     }
+
+    /**
+     * 判断是否存在指定分类.
+     *
+     * @param $id
+     * @return bool
+     */
+    public function exists($id)
+    {
+        $orm = $this->getORM();
+        $count = $orm->where(self::KEY_ID, $id)->count();
+
+        return $count > 0;
+    }
 }
