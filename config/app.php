@@ -28,4 +28,37 @@ return array(
     'service_whitelist' => array(
         'Site.Index',
     ),
+
+    'jwt' => array(
+        'iss' => 'simple_bookmark.com',
+        'key' => 'jwt key'
+    ),
+
+    /**
+     * redis 配置
+     */
+    'redis' => array(
+        'servers' => array(
+            'host' => '127.0.0.1',
+            'port' => '6379',
+            'prefix' => 'mark_'
+        ),
+        'DB' => array(
+            'email_code' => 1
+        )
+    ),
+
+    /**
+     * 邮件配置
+     */
+    'PHPMailer' => array(
+        'email' => array(
+            'host' => 'smtp.host.com',
+            'username' => 'user@mail.com',
+            'password' => '********',
+            'from' => 'user@mail.com',
+            'fromName' => 'Simple BookMark',
+            'sign' => '<br /><br />请不要回复此邮件，谢谢！<br /><br />'
+        )
+    )
 );

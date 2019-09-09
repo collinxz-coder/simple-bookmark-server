@@ -32,6 +32,19 @@ $di->notorm = new NotORMDatabase($di->config->get('dbs'), $di->config->get('sys.
 // JSON中文输出
 $di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE);
 
+// jwt扩展
+$di->jwt = new Phalapi\JWT\Lite($di->config->get('app.jwt.key'));
+
+// redis
+$di->redis = function () {
+    return new PhalApi\Redis\Lite($di->config->get('app.redis.servers'));
+};
+
+$di->mailer = function () {
+    return new \PhalApi\PHPMailer\Lite(true);
+};
+
+
 /** ---------------- 定制注册 可选服务组件 ---------------- **/
 
 // 签名验证服务
