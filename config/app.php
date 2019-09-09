@@ -38,14 +38,9 @@ return array(
      * redis 配置
      */
     'redis' => array(
-        'servers' => array(
-            'host' => '127.0.0.1',
-            'port' => '6379',
-            'prefix' => 'mark_'
-        ),
-        'DB' => array(
-            'email_code' => 1
-        )
+        'host' => '127.0.0.1',
+        'port' => '6379',
+        'prefix' => 'mark_'
     ),
 
     /**

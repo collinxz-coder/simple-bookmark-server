@@ -36,9 +36,7 @@ $di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE);
 $di->jwt = new Phalapi\JWT\Lite($di->config->get('app.jwt.key'));
 
 // redis
-$di->redis = function () {
-    return new PhalApi\Redis\Lite($di->config->get('app.redis.servers'));
-};
+$di->cache = new \PhalApi\Cache\RedisCache($di->config->get('app.redis'));
 
 $di->mailer = function () {
     return new \PhalApi\PHPMailer\Lite(true);

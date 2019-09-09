@@ -21,7 +21,6 @@
         "phalapi/cli": "dev-master",
         "phalapi/task": "dev-master",
         "phalapi/jwt": "dev-master",
-        "phalapi/redis": "dev-master",
         "phalapi/phpmailer": "dev-master"
     },
     "autoload": {
