@@ -36,11 +36,9 @@ $di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE);
 $di->jwt = new Phalapi\JWT\Lite($di->config->get('app.jwt.key'));
 
 // redis
-$di->cache = new \PhalApi\Cache\RedisCache($di->config->get('app.redis'));
+$di->cache = new \App\Model\Redis($di->config->get('app.redis'));
 
-$di->mailer = function () {
-    return new \PhalApi\PHPMailer\Lite(true);
-};
+$di->mailer = new \PhalApi\PHPMailer\Lite(true);
 
 
 /** ---------------- 定制注册 可选服务组件 ---------------- **/
