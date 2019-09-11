@@ -13,6 +13,13 @@ use \PhalApi\Exception\BadRequestException;
 
 class BookClass
 {
+    private $user_id;
+
+    public function __construct()
+    {
+        $this->user_id = \PhalApi\DI()->request->user_id;
+    }
+
     /**
      * 添加书签分类.
      *
@@ -23,7 +30,7 @@ class BookClass
     public function addClass($name, $parent_id = 0)
     {
         $model = new Model_BookClass();
-        $insert_id = $model->addClass($parent_id, $name);
+        $insert_id = $model->addClass($this->user_id ,$parent_id, $name);
 
         if (!$insert_id) {
             throw new BadRequestException(ERROR_MSG[INSERT_ERROR], INSERT_ERROR);
@@ -38,7 +45,7 @@ class BookClass
      */
     public function deleteClass($id) {
         $model = new Model_BookClass();
-        $child_class = $model->getCount($id);
+        $child_class = $model->getCount($id, $this->user_id);
 
         if ($child_class) {
             throw new BadRequestException(ERROR_MSG[NOT_EMPTY_CLASS], NOT_EMPTY_CLASS);
@@ -68,7 +75,7 @@ class BookClass
     {
         $model = new Model_BookClass();
 
-        $res = $model->updateClass($id, $parent_id, $name);
+        $res = $model->updateClass($this->user_id, $id, $parent_id, $name);
 
         if ($res === false) {
             throw new BadRequestException(ERROR_MSG[UPDATE_ERROR], UPDATE_ERROR);
@@ -85,6 +92,6 @@ class BookClass
     {
         $model = new Model_BookClass();
 
-        return $model->getCount($id);
+        return $model->getCount($id, $this->user_id);
     }
 }

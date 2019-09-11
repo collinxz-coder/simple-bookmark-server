@@ -14,6 +14,13 @@ use PhalApi\Exception\BadRequestException;
 
 class BookMark
 {
+    private $user_id;
+
+    public function __construct()
+    {
+        $this->user_id = \PhalApi\DI()->request->user_id;
+    }
+
     /**
      * 获取所有的书签
      * @return mixed
@@ -21,7 +28,7 @@ class BookMark
     public function getAllBookMark()
     {
         $model_bookmark = new Model_BookMark();
-        return $model_bookmark->getAllBookMark();
+        return $model_bookmark->getAllBookMark($this->user_id);
     }
 
     /**
@@ -37,16 +44,16 @@ class BookMark
         $model_bookmark = new Model_BookMark();
         $model_bookclass = new Model_BookClass();
 
-        if (! $model_bookclass->exists($class_id)) {
+        if (! $model_bookclass->exists($this->user_id, $class_id)) {
             throw new BadRequestException(ERROR_MSG[CLASS_NOT_EXISTS], CLASS_NOT_EXISTS);
         }
 
 
-        if ($model_bookmark->urlExists($url)) {
+        if ($model_bookmark->urlExists($url, $this->user_id)) {
             throw new BadRequestException(ERROR_MSG[URL_EXISTS], URL_EXISTS);
         }
 
-        $res = $model_bookmark->addBookMark($class_id, $mark_name, $url);
+        $res = $model_bookmark->addBookMark($this->user_id, $class_id, $mark_name, $url);
         if (! $res) {
             throw new BadRequestException(ERROR_MSG[INSERT_ERROR], INSERT_ERROR);
         }
@@ -61,7 +68,7 @@ class BookMark
     public function deleteBookMark($id)
     {
         $model_bookmark = new Model_BookMark();
-        if ($model_bookmark->deleteBookMark($id)) {
+        if ($model_bookmark->deleteBookMark($id, $this->user_id)) {
             throw new BadRequestException(ERROR_MSG[DELETE_ERROR], DELETE_ERROR);
         }
     }
@@ -80,11 +87,11 @@ class BookMark
         $model_bookmark = new Model_BookMark();
         $model_bookclass = new Model_BookClass();
 
-        if (!empty($class_id) && !$model_bookclass->exists($class_id)) {
+        if (!empty($class_id) && !$model_bookclass->exists($this->user_id, $class_id)) {
             throw new BadRequestException(ERROR_MSG[CLASS_NOT_EXISTS], CLASS_NOT_EXISTS);
         }
 
-        if ($model_bookmark->updateBookMark($id, $name, $url, $class_id) === false) {
+        if ($model_bookmark->updateBookMark($this->user_id, $id, $name, $url, $class_id) === false) {
             throw new BadRequestException(ERROR_MSG[UPDATE_ERROR], UPDATE_ERROR);
         }
     }
@@ -97,6 +104,6 @@ class BookMark
      */
     public function getBookMarkFromClass($class_id)
     {
-        return (new Model_BookMark())->getBookMarkFromClass($class_id);
+        return (new Model_BookMark())->getBookMarkFromClass($this->user_id, $class_id);
     }
 }
