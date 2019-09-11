@@ -26,7 +26,7 @@ return array(
      * - Site.Index  指定某个接口服务，即Api_Default::Index()
      */
     'service_whitelist' => array(
-        'Site.Index',
+        'User.*'
     ),
 
     'jwt' => array(
@@ -48,11 +48,13 @@ return array(
      */
     'PHPMailer' => array(
         'email' => array(
-            'host' => 'smtp.host.com',
-            'username' => 'user@mail.com',
-            'password' => '********',
-            'from' => 'user@mail.com',
+            'host' => '',
+            'username' => '',
+            'password' => '',
+            'from' => '',
             'fromName' => 'Simple BookMark',
+            'port' => 465,
+            'Secure' => 'ssl',
             'sign' => '<br /><br />请不要回复此邮件，谢谢！<br /><br />'
         )
     )
