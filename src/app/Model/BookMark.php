@@ -64,7 +64,8 @@ class BookMark extends NotORM
             self::KEY_CLASS_ID => $class_id,
             self::KEY_MARK_NAME => $mark_name,
             self::KEY_URL => $url,
-            self::KEY_USER_ID => $user_id
+            self::KEY_USER_ID => $user_id,
+            self::KEY_CREATE_AT => time()
         );
 
         $orm->insert($data);
