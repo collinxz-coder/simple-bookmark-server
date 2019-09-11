@@ -33,20 +33,20 @@ class PhpUnderControl_AppApiUser_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testRegister()
     {
-//        try {
-//            $url = 's=User.Register';
-//            $params = array(
-//                'username' => 'collin',
-//                'email' => 'pchangl@163.com',
-//                'password' => '123456789',
-//                'email_code' => '80253',
-//            );
-//
-//            TestRunner::go($url, $params);
-//        } catch (\Exception $e) {
-//            $this->fail($e->getMessage());
-//        }
-//        $this->assertTrue(true);
+        try {
+            $url = 's=User.Register';
+            $params = array(
+                'username' => 'collin',
+                'email' => 'pchangl@163.com',
+                'password' => '123456789',
+                'email_code' => '80253',
+            );
+
+            TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+        $this->assertTrue(true);
     }
 
     /**
@@ -76,20 +76,20 @@ class PhpUnderControl_AppApiUser_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testForgetPassword()
     {
-//        try {
-//            $url = 's=User.ForgetPassword';
-//            $params = array(
-//                'email' => 'pchangl@163.com',
-//                'email_code' => '35277',
-//                'new_password' => '123456789'
-//            );
-//
-//            TestRunner::go($url, $params);
-//        } catch (\Exception $e) {
-//            $this->fail($e->getMessage());
-//        }
-//
-//        $this->assertTrue(true);
+        try {
+            $url = 's=User.ForgetPassword';
+            $params = array(
+                'email' => 'pchangl@163.com',
+                'email_code' => '35277',
+                'new_password' => '123456789'
+            );
+
+            TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -97,16 +97,16 @@ class PhpUnderControl_AppApiUser_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testSendEmail()
     {
-//        try {
-//            $url = 's=User.SendEmail';
-//            $params = array('email' => 'pchangl@163.com');
-//
-//            TestRunner::go($url, $params);
-//        } catch (\Exception $e) {
-//            $this->fail($e->getMessage());
-//        }
-//
-//        $this->assertTrue(true);
+        try {
+            $url = 's=User.SendEmail';
+            $params = array('email' => 'pchangl@163.com');
+
+            TestRunner::go($url, $params);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertTrue(true);
     }
 
 }
