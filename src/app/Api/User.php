@@ -31,7 +31,7 @@ class User extends Api
             ),
             'login' => array(
                 'username' => array('name' => 'username', 'type' => 'string', 'desc' => '用户名'),
-                'email' => array('name' => 'email', 'regex' => '/([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})/', '邮箱地址'),
+                'email' => array('name' => 'email', 'regex' => '/([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})/', 'desc' => '邮箱地址', 'message' => '邮箱格式错误'),
                 'password' => array('name' => 'password', 'type' => 'string', 'require' => true, 'desc' => '密码')
             ),
             'forgetPassword' => array(
