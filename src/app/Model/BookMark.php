@@ -115,14 +115,17 @@ class BookMark extends NotORM
     public function updateBookMark($user_id, $id, $name, $url, $class_id)
     {
         $orm = $this->getORM();
-        $data = array(
-            self::KEY_MARK_NAME => $name,
-            self::KEY_URL => $url,
-            self::KEY_CLASS_ID => $class_id,
-            self::KEY_MODIFY_AT => time()
-        );
+        $data = array();
+        !empty($name) && $data[self::KEY_MARK_NAME] = $name;
+        !empty($url) &&  $data[self::KEY_URL] = $url;
+        !empty($class_id) && $data[self::KEY_CLASS_ID] = $class_id;
 
-        return $orm->where(self::KEY_ID, $id)->where(self::KEY_USER_ID, $user_id)->update($data);
+        if (!empty($data)) {
+            $data[self::KEY_MODIFY_AT] = time();
+            return $orm->where(self::KEY_ID, $id)->where(self::KEY_USER_ID, $user_id)->update($data);
+        }
+
+        return 0;
     }
 
 
