@@ -123,7 +123,7 @@ class BookMark extends Api
      */
     public function increaseReadCount()
     {
-
+        (new Domain_BookMark())->increaseReadCount($this->id);
     }
 
     /**

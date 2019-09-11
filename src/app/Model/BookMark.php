@@ -18,6 +18,7 @@ class BookMark extends NotORM
     const KEY_CREATE_AT = 'create_at';
     const KEY_MODIFY_AT = 'modify_at';
     const KEY_USER_ID = 'user_id';
+    const KEY_READ_COUNT = 'read_count';
 
     public function getTableName($id)
     {
@@ -135,5 +136,28 @@ class BookMark extends NotORM
     {
         $orm = $this->getORM();
         return $orm->where(self::KEY_CLASS_ID, $class_id)->where(self::KEY_USER_ID, $user_id)->fetchAll();
+    }
+
+    /**
+     * 更新点击次数.
+     *
+     * @param int $user_id 用户id
+     * @param int $id 书签id
+     * @return int
+     */
+    public function increaseReadCount($user_id, $id)
+    {
+        $prefix = \PhalApi\DI()->config->get('dbs.tables.__default__.prefix');
+        $orm = $this->getORM();
+
+        $table_name = $this->getTableName(0);
+        $read_count = self::KEY_READ_COUNT;
+        $key_id = self::KEY_ID;
+        $key_user_id = self::KEY_USER_ID;
+
+        $sql = "update {$prefix}{$table_name} set {$read_count} = {$read_count} + 1 where {$key_id} = ? and {$key_user_id} = ?";
+        $params = array($id, $user_id);
+
+        return $orm->executeSql($sql, $params);
     }
 }

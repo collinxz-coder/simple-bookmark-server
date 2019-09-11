@@ -106,4 +106,19 @@ class BookMark
     {
         return (new Model_BookMark())->getBookMarkFromClass($this->user_id, $class_id);
     }
+
+    /**
+     * 阅读数自增.
+     *
+     * @param int $id 书签id
+     * @throws BadRequestException
+     */
+    public function increaseReadCount($id)
+    {
+        $model = new Model_BookMark();
+
+        if (! $model->increaseReadCount($this->user_id, $id)) {
+            throw new BadRequestException(ERROR_MSG[UPDATE_ERROR], UPDATE_ERROR);
+        }
+    }
 }
