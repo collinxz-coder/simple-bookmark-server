@@ -19,6 +19,9 @@ class BookMark extends Api
     public function getRules()
     {
         return array(
+            'getAllBookMark' => array(
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
+            ),
             'addBookMark' => array(
                 'class_id' => array('name'  => 'class_id', 'type' => 'int', 'require' => true, 'desc' => '书签分类id'),
                 'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '书签名称'),
