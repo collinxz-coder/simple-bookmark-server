@@ -97,4 +97,15 @@ class BookClass extends NotORM {
 
         return $count > 0;
     }
+
+    /**
+     * 获取用户所有的分类.
+     *
+     * @param int $user_id 用户id
+     * @return mixed
+     */
+    public function getUserAllClass($user_id)
+    {
+        return $this->getORM()->where(self::KEY_USER_ID, $user_id)->fetchAll();
+    }
 }

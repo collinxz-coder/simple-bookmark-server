@@ -38,6 +38,9 @@ class BookClass extends Api
             'classBookMarkCount' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '分类id'),
                 'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
+            ),
+            'getAllClass' => array(
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             )
         );
     }
@@ -86,7 +89,7 @@ class BookClass extends Api
 
     /**
      * 获取指定分类下的书签数量
-     * @获取指定分类下的书签数量
+     * @desc 获取指定分类下的书签数量
      *
      * @return int count 书签数量
      * @exception 400 参数不匹配
@@ -96,5 +99,18 @@ class BookClass extends Api
         $domainBookClass = new Domain_BookClass();
         $count = $domainBookClass->getCount($this->id);
         return array('count' => $count);
+    }
+
+    /**
+     * 获取所有分类
+     * @desc 获取用户所有的书签分类
+     *
+     *
+     */
+    public function getAllClass()
+    {
+        $book_class = (new Domain_BookClass())->getUserAll();
+
+        return $book_class;
     }
 }

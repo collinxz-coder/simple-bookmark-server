@@ -94,4 +94,14 @@ class BookClass
 
         return $model->getCount($id, $this->user_id);
     }
+
+    /**
+     * 获取用户所有的分类.
+     *
+     * @return mixed
+     */
+    public function getUserAll()
+    {
+        return (new Model_BookClass())->getUserAllClass($this->user_id);
+    }
 }
