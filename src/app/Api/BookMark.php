@@ -51,6 +51,9 @@ class BookMark extends Api
             'getBookMarkFromClass' => array(
                 'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'require' => true, 'desc' => '书签分类id'),
                 'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
+            ),
+            'getAllBookMarkAndBookClass' => array(
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             )
         );
     }
@@ -144,5 +147,15 @@ class BookMark extends Api
     public function getBookMarkFromClass()
     {
         return (new Domain_BookMark())->getBookMarkFromClass($this->class_id);
+    }
+
+    /**
+     * 获取所有分类和书签.
+     *
+     * @return mixed
+     */
+    public function getAllBookMarkAndBookClass()
+    {
+        return (new Domain_BookMark())->getBookMarkAndClass();
     }
 }

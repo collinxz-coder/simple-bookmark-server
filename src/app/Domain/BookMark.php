@@ -127,4 +127,28 @@ class BookMark
         $model = new Model_BookMark();
         return $model->getTopByReadCount($this->user_id, $class_id, $count);
     }
+
+    /**
+     * 获取所有分类和书签。
+     *
+     * @return mixed
+     */
+    public function getBookMarkAndClass()
+    {
+        $model_book_mark = new Model_BookMark();
+        $model_book_class = new Model_BookClass();
+
+        $class = $model_book_class->getUserAllClass($this->user_id);
+        foreach ($class as &$value) {
+            $value['type'] = 'dir';
+            $class_id = $value['id'];
+            $marks = $model_book_mark->getBookMarkFromClass($this->user_id, $class_id);
+            foreach ($marks as &$mark) {
+                $mark['type'] = 'link';
+            }
+            $value['children'] = $marks;
+        }
+
+        return $class;
+    }
 }

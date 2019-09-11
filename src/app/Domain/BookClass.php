@@ -102,6 +102,14 @@ class BookClass
      */
     public function getUserAll()
     {
-        return (new Model_BookClass())->getUserAllClass($this->user_id);
+        $model_book_mark = new Model_BookMark();
+        $data = (new Model_BookClass())->getUserAllClass($this->user_id);
+
+        foreach ($data as &$item) {
+            $count = $model_book_mark->getCount($item[Model_BookClass::KEY_ID], $this->user_id);
+            $item['mark_count'] = $count;
+        }
+
+        return $data;
     }
 }
