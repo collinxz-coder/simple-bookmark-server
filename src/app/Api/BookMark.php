@@ -64,10 +64,7 @@ class BookMark extends Api
      */
     public function getAllBookMark()
     {
-        $domain_bookmark = new Domain_BookMark();
-        $res = $domain_bookmark->getAllBookMark();
-
-        return ['data' => $res];
+        return (new Domain_BookMark())->getAllBookMark();
     }
 
     /**
@@ -146,7 +143,6 @@ class BookMark extends Api
      */
     public function getBookMarkFromClass()
     {
-        $data = (new Domain_BookMark())->getBookMarkFromClass($this->class_id);
-        return ['data' => $data];
+        return (new Domain_BookMark())->getBookMarkFromClass($this->class_id);
     }
 }
