@@ -52,7 +52,7 @@ class BookClass
         }
 
         $model_bookmark = new Model_BookMark();
-        $bookmark_count = $model_bookmark->getCount($id);
+        $bookmark_count = $model_bookmark->getCount($id, $this->user_id);
         if ($bookmark_count) {
             throw new BadRequestException(ERROR_MSG[NOT_EMPTY_MARK], NOT_EMPTY_MARK);
         }
