@@ -90,7 +90,7 @@ class BookClass
      */
     public function getCount($id)
     {
-        $model = new Model_BookClass();
+        $model = new Model_BookMark();
 
         return $model->getCount($id, $this->user_id);
     }
