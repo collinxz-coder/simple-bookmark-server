@@ -145,6 +145,8 @@ class BookMark
             $marks = $model_book_mark->getBookMarkFromClass($this->user_id, $class_id);
             foreach ($marks as &$mark) {
                 $mark['type'] = 'link';
+                $mark['name'] = $mark['mark_name'];
+                $mark['id'] = "mark_" . $mark["id"];
             }
             $value['children'] = $marks;
         }
