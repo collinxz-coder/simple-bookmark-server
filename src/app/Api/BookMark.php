@@ -22,26 +22,32 @@ class BookMark extends Api
             'addBookMark' => array(
                 'class_id' => array('name'  => 'class_id', 'type' => 'int', 'require' => true, 'desc' => '书签分类id'),
                 'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '书签名称'),
-                'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'require' => true, 'desc' => '书签地址')
+                'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'require' => true, 'desc' => '书签地址'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'deleteBookMark' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '书签 id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'modifyBookMark' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '书签 id'),
                 'name' => array('name' => 'name', 'type' => 'string', 'desc' => '书签名称'),
                 'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'desc' => '书签地址'),
-                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '书签分类id')
+                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '书签分类id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'increaseReadCount' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '书签 id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'readCountTop' => array(
                 'count' => array('name' => 'count', 'type' => 'int', 'default' => 10, 'desc' => '需要获取的数量，默认为10条'),
-                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '需要获取的分类，默认为获取所有分类下的数据')
+                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'desc' => '需要获取的分类，默认为获取所有分类下的数据'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'getBookMarkFromClass' => array(
-                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'require' => true, 'desc' => '书签分类id')
+                'class_id' => array('name' => 'class_id', 'type' => 'int', 'default' => 0, 'require' => true, 'desc' => '书签分类id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             )
         );
     }

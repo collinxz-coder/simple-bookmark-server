@@ -27,7 +27,7 @@ class User extends Api
                 'username' => array('name' => 'username', 'require' => true, 'type' => 'string', 'desc' => '用户名', 'min' => 4),
                 'email' => array('name' => 'email', 'require' => true, 'regex' => '/([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})/', 'desc' => '邮箱地址', 'min' => 8),
                 'password' => array('name' => 'password', 'require' => true, 'type' => 'string', 'desc' => '密码'),
-                'email_code' => array('name' => 'email_code', 'require' => true, 'type' => 'string', 'desc' => '邮箱验证码'),
+                'email_code' => array('name' => 'email_code', 'require' => true, 'type' => 'string', 'desc' => '邮箱验证码')
             ),
             'login' => array(
                 'username' => array('name' => 'username', 'type' => 'string', 'desc' => '用户名'),
@@ -37,7 +37,7 @@ class User extends Api
             'forgetPassword' => array(
                 'email' => array('name' => 'email', 'regex' => '/([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})/', 'require' => 'true', 'desc' => '邮箱地址'),
                 'email_code' => array('name' => 'email_code', 'type' => 'string', 'require' => true, 'desc' => '邮箱验证码'),
-                'new_password' => array('name' => 'new_password', 'type' => 'string', 'require' => true, 'min' => 8, 'desc' => '新密码' )
+                'new_password' => array('name' => 'new_password', 'type' => 'string', 'require' => true, 'min' => 8, 'desc' => '新密码' ),
             ),
             'sendEmail' => array(
                 'email' => array('name' => 'email', 'regex' => '/([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})/', 'require' => 'true', 'desc' => '邮箱地址')
@@ -74,7 +74,9 @@ class User extends Api
         }
 
         $domain = new Domain_User();
-        $domain->login($this->email, $this->username, $this->password);
+        $token = $domain->login($this->email, $this->username, $this->password);
+
+        return ['token' => $token];
     }
 
     /**

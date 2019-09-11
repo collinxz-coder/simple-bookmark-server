@@ -40,6 +40,8 @@ $di->cache = new \App\Model\Redis($di->config->get('app.redis'));
 
 $di->mailer = new \PhalApi\PHPMailer\Lite(true);
 
+// JWT 验证
+$di->filter = new \App\Common\SignJwt('token');
 
 /** ---------------- 定制注册 可选服务组件 ---------------- **/
 

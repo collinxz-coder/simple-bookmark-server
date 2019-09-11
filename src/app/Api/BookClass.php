@@ -9,6 +9,7 @@ namespace App\Api;
 
 use PhalApi\Api;
 use App\Domain\BookClass as Domain_BookClass;
+use PhalApi\Exception\BadRequestException;
 
 /**
  * 书签分类
@@ -21,18 +22,22 @@ class BookClass extends Api
         return array(
             'addClass' => array(
                 'parent_id' => array('name' => 'parent_id', 'type' => 'int', 'require' => true, 'desc' => '父级分类'),
-                'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '分类名称')
+                'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '分类名称'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'deleteClass' => array(
-                'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '分类id')
+                'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '分类id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'modifyClass' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '分类id'),
                 'parent_id' => array('name' => 'parent_id', 'type' => 'int', 'require' => true, 'desc' => '父级分类'),
-                'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '分类名称')
+                'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '分类名称'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'classBookMarkCount' => array(
                 'id' => array('name' => 'id', 'type' => 'int', 'require' => true, 'desc' => '分类id'),
+                'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             )
         );
     }

@@ -10,7 +10,7 @@ namespace App\Domain;
 
 use \App\Model\User as Model_User;
 use \App\Model\EmailCode as Model_EmailCode;
-
+use App\Model\Token;
 use PhalApi\Exception\BadRequestException;
 
 class User
@@ -54,6 +54,7 @@ class User
      * @param string $username 用户名
      * @param string $password 密码
      * @throws BadRequestException
+     * @return string
      */
     public function login($email, $username, $password)
     {
@@ -69,12 +70,15 @@ class User
 
         if (empty($userInfo)) {
             throw new BadRequestException(ERROR_MSG[VERIFY_ERROR], VERIFY_ERROR);
-        } else {
-            $user_id = $userInfo[Model_User::KEY_ID];
-            $model->modifyLoginTime($user_id);
         }
 
-        // TODO: 缓存登录信息
+        $user_id = $userInfo[Model_User::KEY_ID];
+        $model->modifyLoginTime($user_id);
+
+        $token = \PhalApi\DI()->jwt->encodeJwt(['user_id' => $user_id, 'user_name' => $userInfo[Model_User::KEY_USERNAME]]);
+        $model_token = new Token();
+        $model_token->addToken($token, $user_id);
+        return $token;
     }
 
     /**

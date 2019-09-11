@@ -54,11 +54,34 @@ class PhpUnderControl_AppApiUser_Test extends \PHPUnit\Framework\TestCase
      */ 
     public function testLogin()
     {
+        try {
+            $url = 's=User.Login';
+            $params = array(
+                'username' => 'collin',
+                'password' => '123456789'
+            );
+
+            $res = TestRunner::go($url, $params);
+
+            var_dump($res);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @group testForgetPassword
+     */ 
+    public function testForgetPassword()
+    {
 //        try {
-//            $url = 's=User.Login';
+//            $url = 's=User.ForgetPassword';
 //            $params = array(
-//                'username' => 'collin',
-//                'password' => '123456789'
+//                'email' => 'pchangl@163.com',
+//                'email_code' => '35277',
+//                'new_password' => '123456789'
 //            );
 //
 //            TestRunner::go($url, $params);
@@ -67,27 +90,6 @@ class PhpUnderControl_AppApiUser_Test extends \PHPUnit\Framework\TestCase
 //        }
 //
 //        $this->assertTrue(true);
-    }
-
-    /**
-     * @group testForgetPassword
-     */ 
-    public function testForgetPassword()
-    {
-        try {
-            $url = 's=User.ForgetPassword';
-            $params = array(
-                'email' => 'pchangl@163.com',
-                'email_code' => '35277',
-                'new_password' => '123456789'
-            );
-
-            TestRunner::go($url, $params);
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
-
-        $this->assertTrue(true);
     }
 
     /**
