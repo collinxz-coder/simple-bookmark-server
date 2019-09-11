@@ -68,7 +68,7 @@ class BookMark
     public function deleteBookMark($id)
     {
         $model_bookmark = new Model_BookMark();
-        if ($model_bookmark->deleteBookMark($id, $this->user_id)) {
+        if (! $model_bookmark->deleteBookMark($id, $this->user_id)) {
             throw new BadRequestException(ERROR_MSG[DELETE_ERROR], DELETE_ERROR);
         }
     }
