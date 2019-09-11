@@ -121,4 +121,10 @@ class BookMark
             throw new BadRequestException(ERROR_MSG[UPDATE_ERROR], UPDATE_ERROR);
         }
     }
+
+    public function getClassTopRead($class_id, $count)
+    {
+        $model = new Model_BookMark();
+        return $model->getTopByReadCount($this->user_id, $class_id, $count);
+    }
 }

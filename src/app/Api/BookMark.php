@@ -134,7 +134,8 @@ class BookMark extends Api
      */
     public function readCountTop()
     {
-
+        $data = (new Domain_BookMark())->getClassTopRead($this->class_id, $this->count);
+        return $data;
     }
 
     /**

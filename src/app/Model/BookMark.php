@@ -160,4 +160,18 @@ class BookMark extends NotORM
 
         return $orm->executeSql($sql, $params);
     }
+
+    /**
+     * 获取用户点击量最高的书签.
+     *
+     * @param int $user_id 用户id
+     * @param int $class_id 分类id
+     * @param int $count 需要获取的数量
+     * @return mixed
+     */
+    public function getTopByReadCount($user_id, $class_id, $count)
+    {
+        $orm = $this->getORM();
+        return $orm->where(self::KEY_USER_ID, $user_id)->where(self::KEY_CLASS_ID, $class_id)->order(self::KEY_READ_COUNT . " DESC")->limit($count)->fetchAll();
+    }
 }
