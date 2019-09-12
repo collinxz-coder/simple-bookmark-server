@@ -26,6 +26,7 @@ class BookClass
      * @param string $name 分类名称
      * @param int $parent_id 父级分类id.
      * @throws \PhalApi\Exception\BadRequestException
+     * @return int
      */
     public function addClass($name, $parent_id = 0)
     {
@@ -35,6 +36,7 @@ class BookClass
         if (!$insert_id) {
             throw new BadRequestException(ERROR_MSG[INSERT_ERROR], INSERT_ERROR);
         }
+        return $insert_id;
     }
 
     /**

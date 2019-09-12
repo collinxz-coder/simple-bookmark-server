@@ -55,7 +55,8 @@ class BookClass extends Api
     public function addClass()
     {
         $domainBookClass = new Domain_BookClass();
-        $domainBookClass->addClass($this->name, $this->parent_id);
+        $insert_id = $domainBookClass->addClass($this->name, $this->parent_id);
+        return ['id' => $insert_id];
     }
 
     /**
