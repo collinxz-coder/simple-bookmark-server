@@ -19,6 +19,7 @@ class BookMark extends NotORM
     const KEY_MODIFY_AT = 'modify_at';
     const KEY_USER_ID = 'user_id';
     const KEY_READ_COUNT = 'read_count';
+    const KEY_ICON = 'icon';
 
     public function getTableName($id)
     {
@@ -55,9 +56,10 @@ class BookMark extends NotORM
      * @param int $class_id 分类id
      * @param string $mark_name 书签名称
      * @param string $url url地址
+     * @param string $icon 图标
      * @return string
      */
-    public function addBookMark($user_id, $class_id, $mark_name, $url)
+    public function addBookMark($user_id, $class_id, $mark_name, $url, $icon)
     {
         $orm = $this->getORM();
         $data = array(
@@ -67,6 +69,7 @@ class BookMark extends NotORM
             self::KEY_USER_ID => $user_id,
             self::KEY_CREATE_AT => time()
         );
+        !empty($icon) && $data['icon'] = $icon;
 
         $orm->insert($data);
 

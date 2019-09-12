@@ -37,9 +37,10 @@ class BookMark
      * @param int $class_id 分类id
      * @param string $mark_name 书签名称
      * @param string $url 书签url
+     * @param string $icon 图标地址
      * @throws BadRequestException
      */
-    public function addBookMark($class_id, $mark_name, $url)
+    public function addBookMark($class_id, $mark_name, $url, $icon)
     {
         $model_bookmark = new Model_BookMark();
         $model_bookclass = new Model_BookClass();
@@ -53,7 +54,7 @@ class BookMark
             throw new BadRequestException(ERROR_MSG[URL_EXISTS], URL_EXISTS);
         }
 
-        $res = $model_bookmark->addBookMark($this->user_id, $class_id, $mark_name, $url);
+        $res = $model_bookmark->addBookMark($this->user_id, $class_id, $mark_name, $url, $icon);
         if (! $res) {
             throw new BadRequestException(ERROR_MSG[INSERT_ERROR], INSERT_ERROR);
         }

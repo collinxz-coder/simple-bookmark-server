@@ -26,6 +26,7 @@ class BookMark extends Api
                 'class_id' => array('name'  => 'class_id', 'type' => 'int', 'require' => true, 'desc' => '书签分类id'),
                 'name' => array('name' => 'name', 'type' => 'string', 'require' => true, 'desc' => '书签名称'),
                 'url' => array('name' => 'url', 'regex' => '/[\w]+:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', 'require' => true, 'desc' => '书签地址'),
+                'icon' => array('name' => 'icon', 'type' => 'string', 'desc' => '网站图标'),
                 'token' => array('name' => 'token', 'type' => 'string', 'require' => true, 'desc' => 'token')
             ),
             'deleteBookMark' => array(
@@ -83,7 +84,7 @@ class BookMark extends Api
     public function addBookMark()
     {
         $domain_bookmark = new Domain_BookMark();
-        $domain_bookmark->addBookMark($this->class_id, $this->name, $this->url);
+        $domain_bookmark->addBookMark($this->class_id, $this->name, $this->url, $this->icon);
     }
 
     /**
