@@ -39,6 +39,7 @@ class BookMark
      * @param string $url 书签url
      * @param string $icon 图标地址
      * @throws BadRequestException
+     * @return int
      */
     public function addBookMark($class_id, $mark_name, $url, $icon)
     {
@@ -58,6 +59,8 @@ class BookMark
         if (! $res) {
             throw new BadRequestException(ERROR_MSG[INSERT_ERROR], INSERT_ERROR);
         }
+
+        return $res;
     }
 
     /**

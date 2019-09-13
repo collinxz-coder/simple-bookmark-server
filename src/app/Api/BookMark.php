@@ -84,7 +84,8 @@ class BookMark extends Api
     public function addBookMark()
     {
         $domain_bookmark = new Domain_BookMark();
-        $domain_bookmark->addBookMark($this->class_id, $this->name, $this->url, $this->icon);
+        $insert_id = $domain_bookmark->addBookMark($this->class_id, $this->name, $this->url, $this->icon);
+        return ['id' => $insert_id];
     }
 
     /**
